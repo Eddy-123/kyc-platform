@@ -1,5 +1,5 @@
 from rest_framework.permissions import BasePermission
-from app.users.models import User
+from apps.users.models import User
 
 
 class IsPartner(BasePermission):
