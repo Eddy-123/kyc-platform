@@ -19,3 +19,6 @@ class AuditLog(models.Model):
             models.Index(fields=["target_type", "target_id"]),
             models.Index(fields=["created_at"]),
         ]
+
+    def __str__(self):
+        return f"{self.actor}: {self.action} on {self.target_type}"

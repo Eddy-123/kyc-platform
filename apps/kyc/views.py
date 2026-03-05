@@ -9,7 +9,7 @@ from apps.kyc.serializers import (
     KYCDetailSerializer,
     DocumentUploadSerializer,
 )
-from apps.kyc.permissions import IsPartner, IsKYCParticipant
+from apps.kyc.permissions import IsPartner, IsKYCParticipant, IsClient
 from apps.kyc.services.kyc_service import submit_document
 from apps.kyc.state_machine import transition_kyc
 from apps.audit.models import AuditLog
@@ -21,14 +21,20 @@ class KYCCreateView(generics.CreateAPIView):
     serializer_class = KYCCreateSerializer
     permission_classes = [IsAuthenticated, IsPartner]
 
-    def perform_create(self, serializer):
-        kyc = serializer.save(partner=self.request.user)
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        kyc = serializer.save(partner=request.user)
+
         AuditLog.objects.create(
-            actor=self.request.user,
+            actor=request.user,
             action="KYC_INITIATED",
             target_type="KYCVerification",
             target_id=kyc.id,
         )
+
+        return Response({"kyc_id": kyc.id}, status=status.HTTP_201_CREATED)
 
 
 class KYCDetailView(generics.RetrieveAPIView):
@@ -39,7 +45,7 @@ class KYCDetailView(generics.RetrieveAPIView):
 
 class DocumentUploadView(generics.CreateAPIView):
     serializer_class = DocumentUploadSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsClient]
 
     def perform_create(self, serializer):
         kyc = get_object_or_404(KYCVerification, pk=self.kwargs["pk"])
@@ -57,7 +63,7 @@ class DocumentUploadView(generics.CreateAPIView):
 
 
 class FaceVerificationView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsClient]
 
     def post(self, request, pk):
         kyc = get_object_or_404(KYCVerification, pk=pk)
