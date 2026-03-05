@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "apps.users.apps.UsersConfig",
     "apps.kyc.apps.KycConfig",
+    "apps.audit.apps.AuditConfig",
 ]
 
 MIDDLEWARE = [
