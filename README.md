@@ -72,4 +72,36 @@ You can find the postman doc [here](schema/WDS.postman_collection.json) and in t
 
 Django enables rapid, secure, and maintainable development, making it ideal for a KYC system with JWT authentication and RSA signatures.
 
-We use RSA signatures because asymmetric cryptography allows secure signing and verification without exposing private keys.
+RSA signatures are used because asymmetric cryptography allows secure signing and verification without exposing private keys.
+
+PostgreSQL is used because it is a relational database that enforces relationships between models.
+
+# KYC lifecycle
+
+- Create KYC
+  - actor: Partner
+- Upload document
+  - actor: Client
+- Face verification
+  - actor: Client
+- Signature generation
+  - Anyone authenticated
+- Signature verification
+  - Anyone authenticated
+
+# Technical requirements
+
+- JWT authentication
+- RSA signature
+- Rate limiting: 100/hour
+- Data validation with serializers: DocumentUploadSerializer for example
+- Logging system with audit application
+- Error handling with Exceptions and serializers
+- Tests: state_machine in kyc app and AuditLog model
+- Request to demonstrate extra care to performance
+  - partners/me/kyc-dashboard
+  - send dashboard data of a partner related KYC
+  - .aggregate() combines everything into one sql request
+  - .select_related() and .prefetch_related() avoid N+1 query problem
+  - [:10] prevents from fetching useless data
+  - db indexes in models
