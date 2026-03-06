@@ -1,0 +1,1070 @@
+{
+	"info": {
+		"_postman_id": "6e8d10b1-1a7c-4514-a079-28114e480ff3",
+		"name": "WDS",
+		"description": "This is a Django-based API designed for KYC and electronic signature to enforce numeric trust as part of the Westaf Digital Services interview process",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25331959"
+	},
+	"item": [
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "partner",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "p@ssw0rd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "partner",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "partner",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/login/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 05 Mar 2026 09:27:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.13"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "582"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3Mjc4OTI1NywiaWF0IjoxNzcyNzAyODU3LCJqdGkiOiJjZDg3YTJkNzJiZjg0M2U1YjYwZTZlOTg3MmUyNjUyNiIsInVzZXJfaWQiOiI3NWE5ODBjMC0wNWVhLTQ1YzctYTAzYi1hZDNkNDA1ODNkY2QifQ.09pEdvKxnowKbpV_brlfbwfcP_o_rLhN0IY_WvykUoY\",\n    \"access\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcyNzAzMTU3LCJpYXQiOjE3NzI3MDI4NTcsImp0aSI6IjU4Mzc1MjAyOGZhZDQ0NWU5NDZlNzQyZmFmYmM1YTgxIiwidXNlcl9pZCI6Ijc1YTk4MGMwLTA1ZWEtNDVjNy1hMDNiLWFkM2Q0MDU4M2RjZCJ9.e4B6ob3lvlvkDOIxRPbltQODRNiNAxLyyhCwqJ2jXGM\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "KYC",
+			"item": [
+				{
+					"name": "Create KYC Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "client",
+									"value": "4c15ad53-f651-442b-ba06-00bd242ce8fe",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/kyc/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kyc",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create KYC",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "client",
+											"value": "4c15ad53-f651-442b-ba06-00bd242ce8fe",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/kyc/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"kyc",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 05 Mar 2026 22:26:51 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.13"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"kyc_id\": \"43948774-1fe1-4af6-84b0-727addcabe49\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Document Upload",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{client_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/eddy/Pictures/Screenshots/Django.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/kyc/{{kyc_id}}/documents/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kyc",
+								"{{kyc_id}}",
+								"documents",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Document Upload",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/home/eddy/Pictures/Screenshots/Django.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/kyc/43948774-1fe1-4af6-84b0-727addcabe49/documents/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"kyc",
+										"43948774-1fe1-4af6-84b0-727addcabe49",
+										"documents",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 05 Mar 2026 22:31:52 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.13"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"file\": \"http://127.0.0.1:8000/kyc/43948774-1fe1-4af6-84b0-727addcabe49/Django.png\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Face Verification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{client_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/kyc/{{kyc_id}}/face-verification/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kyc",
+								"{{kyc_id}}",
+								"face-verification",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Face Verification Match",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/kyc/7832ccb9-486f-4737-8ebd-48f6a8f60089/face-verification/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"kyc",
+										"7832ccb9-486f-4737-8ebd-48f6a8f60089",
+										"face-verification",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 05 Mar 2026 22:47:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.13"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"result\": \"match\",\n    \"confidence\": 0.9238091477286952\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/kyc/{{kyc_id}}/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kyc",
+								"{{kyc_id}}",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Status",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/kyc/7832ccb9-486f-4737-8ebd-48f6a8f60089/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"kyc",
+										"7832ccb9-486f-4737-8ebd-48f6a8f60089",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 05 Mar 2026 22:53:31 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.13"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "279"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"7832ccb9-486f-4737-8ebd-48f6a8f60089\",\n    \"status\": \"verified\",\n    \"created_at\": \"2026-03-05T22:46:47.863322Z\",\n    \"updated_at\": \"2026-03-05T22:47:59.922064Z\",\n    \"verified_at\": null,\n    \"version\": 4,\n    \"partner\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n    \"client\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate Signature",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/kyc/{{kyc_id}}/signature/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kyc",
+								"{{kyc_id}}",
+								"signature",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Signature",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/kyc/7832ccb9-486f-4737-8ebd-48f6a8f60089/signature/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"kyc",
+										"7832ccb9-486f-4737-8ebd-48f6a8f60089",
+										"signature",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 06 Mar 2026 04:38:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.13"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "576"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"kyc_id\": \"7832ccb9-486f-4737-8ebd-48f6a8f60089\",\n    \"signature\": \"654b4774f80470b73ea5154f165f2563b8c84a6652cb02b5dbacb033ade067ab87ab48b6ff650575fffca988f38cec6db97a5e441013d6bf10a8e64cf8b38d3295594815f6cbd17e64827ca050ed6b49e8868b09b187f1d0527c337e8393caf0917b4d727ea3a8a6459b7c088e023fe9d714ec30dec47e90e20318929306760836e3f102b241a27563b4535e0ddd9bfead0b2e100c075a9d458272261da88c460148c571c2f537b772dea41a565ef93da695c93a0ad2292abb7bd407c19d8af24f0b51b5c2f1862f80b20a58bda734da3ff464742896d0cf67ef4169f8b7f1cfba0ce837bebdf3442a97435401388cb5f0c95397035d1174b9f49e7fd27f6209\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Verify Signature",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcyNzc5MDY3LCJpYXQiOjE3NzI3NzE4NjcsImp0aSI6IjRmNDVhZjRjNmJiZjQ1MTJiMDU2MzExNmUwYTJjYzQ0IiwidXNlcl9pZCI6IjNmNjg4ZThmLTQ2ZGItNDVjZC04OWJlLTc2OTVjOTFlNjY2MCJ9.t_qAPFljUrlqxxgzCcIP-m8_C-N3sAMhrg_f-TgjOE4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payload\": {\n        \"kyc_id\": \"7832ccb9-486f-4737-8ebd-48f6a8f60089\",\n        \"partner_id\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n        \"client_id\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\",\n        \"verified_at\": \"\",\n        \"document_checksum\": \"8c7e1f787f116d5b0897de0b3ea2048dae268e918624f13e5356f09b12b7451a\"\n    },\n    \"signature\": \"654b4774f80470b73ea5154f165f2563b8c84a6652cb02b5dbacb033ade067ab87ab48b6ff650575fffca988f38cec6db97a5e441013d6bf10a8e64cf8b38d3295594815f6cbd17e64827ca050ed6b49e8868b09b187f1d0527c337e8393caf0917b4d727ea3a8a6459b7c088e023fe9d714ec30dec47e90e20318929306760836e3f102b241a27563b4535e0ddd9bfead0b2e100c075a9d458272261da88c460148c571c2f537b772dea41a565ef93da695c93a0ad2292abb7bd407c19d8af24f0b51b5c2f1862f80b20a58bda734da3ff464742896d0cf67ef4169f8b7f1cfba0ce837bebdf3442a97435401388cb5f0c95397035d1174b9f49e7fd27f6209\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/kyc/signature/verify/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kyc",
+								"signature",
+								"verify",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Verify Signature Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"payload\": {\n        \"kyc_id\": \"7832ccb9-486f-4737-8ebd-48f6a8f60089\",\n        \"partner_id\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n        \"client_id\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\",\n        \"verified_at\": \"None\",\n        \"document_checksum\": \"8c7e1f787f116d5b0897de0b3ea2048dae268e918624f13e5356f09b12b7451a\"\n    },\n    \"signature\": \"654b4774f80470b73ea5154f165f2563b8c84a6652cb02b5dbacb033ade067ab87ab48b6ff650575fffca988f38cec6db97a5e441013d6bf10a8e64cf8b38d3295594815f6cbd17e64827ca050ed6b49e8868b09b187f1d0527c337e8393caf0917b4d727ea3a8a6459b7c088e023fe9d714ec30dec47e90e20318929306760836e3f102b241a27563b4535e0ddd9bfead0b2e100c075a9d458272261da88c460148c571c2f537b772dea41a565ef93da695c93a0ad2292abb7bd407c19d8af24f0b51b5c2f1862f80b20a58bda734da3ff464742896d0cf67ef4169f8b7f1cfba0ce837bebdf3442a97435401388cb5f0c95397035d1174b9f49e7fd27f6209\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/kyc/signature/verify/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"kyc",
+										"signature",
+										"verify",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 06 Mar 2026 04:48:55 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.13"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "14"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"valid\": true\n}"
+						},
+						{
+							"name": "Verify Signature Failure",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"payload\": {\n        \"kyc_id\": \"7832ccb9-486f-4737-8ebd-48f6a8f60089\",\n        \"partner_id\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n        \"client_id\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\",\n        \"verified_at\": \"\",\n        \"document_checksum\": \"8c7e1f787f116d5b0897de0b3ea2048dae268e918624f13e5356f09b12b7451a\"\n    },\n    \"signature\": \"654b4774f80470b73ea5154f165f2563b8c84a6652cb02b5dbacb033ade067ab87ab48b6ff650575fffca988f38cec6db97a5e441013d6bf10a8e64cf8b38d3295594815f6cbd17e64827ca050ed6b49e8868b09b187f1d0527c337e8393caf0917b4d727ea3a8a6459b7c088e023fe9d714ec30dec47e90e20318929306760836e3f102b241a27563b4535e0ddd9bfead0b2e100c075a9d458272261da88c460148c571c2f537b772dea41a565ef93da695c93a0ad2292abb7bd407c19d8af24f0b51b5c2f1862f80b20a58bda734da3ff464742896d0cf67ef4169f8b7f1cfba0ce837bebdf3442a97435401388cb5f0c95397035d1174b9f49e7fd27f6209\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/kyc/signature/verify/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"kyc",
+										"signature",
+										"verify",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 06 Mar 2026 04:52:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.13"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "15"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"valid\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Partner Dashboard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/kyc/partners/me/kyc-dashboard/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"kyc",
+								"partners",
+								"me",
+								"kyc-dashboard",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Partner Dashboard",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/kyc/partners/me/kyc-dashboard/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"kyc",
+										"partners",
+										"me",
+										"kyc-dashboard",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 06 Mar 2026 13:20:56 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.13"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2715"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"stats\": {\n        \"total\": 9,\n        \"initiated\": 2,\n        \"document_submitted\": 2,\n        \"face_verification_pending\": 0,\n        \"verified\": 0,\n        \"rejected\": 1,\n        \"signed\": 4\n    },\n    \"avg_face_confidence\": 0.8108830817670324,\n    \"recent_kyc\": [\n        {\n            \"id\": \"1f95ea65-ddc8-4fda-9497-0eafde0cddf0\",\n            \"status\": \"signed\",\n            \"created_at\": \"2026-03-06T13:11:52.096669Z\",\n            \"updated_at\": \"2026-03-06T13:16:56.841991Z\",\n            \"verified_at\": null,\n            \"version\": 5,\n            \"partner\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n            \"client\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\"\n        },\n        {\n            \"id\": \"4337f5ae-d2a2-465a-8b28-3da2f7c9f59a\",\n            \"status\": \"signed\",\n            \"created_at\": \"2026-03-06T08:59:19.578779Z\",\n            \"updated_at\": \"2026-03-06T09:07:59.532058Z\",\n            \"verified_at\": null,\n            \"version\": 5,\n            \"partner\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n            \"client\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\"\n        },\n        {\n            \"id\": \"fc6119ba-680a-4a0f-b7ad-38d244b08721\",\n            \"status\": \"signed\",\n            \"created_at\": \"2026-03-06T07:27:44.196160Z\",\n            \"updated_at\": \"2026-03-06T07:32:16.019962Z\",\n            \"verified_at\": null,\n            \"version\": 5,\n            \"partner\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n            \"client\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\"\n        },\n        {\n            \"id\": \"9a976d10-1ecc-4d00-b0c8-81bb21740e11\",\n            \"status\": \"document_submitted\",\n            \"created_at\": \"2026-03-06T07:25:46.772409Z\",\n            \"updated_at\": \"2026-03-06T07:26:13.164689Z\",\n            \"verified_at\": null,\n            \"version\": 2,\n            \"partner\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n            \"client\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\"\n        },\n        {\n            \"id\": \"ac5d38b9-935f-4159-8718-2b394cf9355b\",\n            \"status\": \"initiated\",\n            \"created_at\": \"2026-03-06T07:17:58.070388Z\",\n            \"updated_at\": \"2026-03-06T07:17:58.070406Z\",\n            \"verified_at\": null,\n            \"version\": 1,\n            \"partner\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n            \"client\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\"\n        },\n        {\n            \"id\": \"752b2693-fc3c-4a12-b8fc-67f2875ef3da\",\n            \"status\": \"document_submitted\",\n            \"created_at\": \"2026-03-05T23:24:34.423071Z\",\n            \"updated_at\": \"2026-03-05T23:25:17.569195Z\",\n            \"verified_at\": null,\n            \"version\": 2,\n            \"partner\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n            \"client\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\"\n        },\n        {\n            \"id\": \"b6092288-f301-4572-a602-bbad09393599\",\n            \"status\": \"initiated\",\n            \"created_at\": \"2026-03-05T22:46:58.754440Z\",\n            \"updated_at\": \"2026-03-05T22:46:58.754456Z\",\n            \"verified_at\": null,\n            \"version\": 1,\n            \"partner\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n            \"client\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\"\n        },\n        {\n            \"id\": \"7832ccb9-486f-4737-8ebd-48f6a8f60089\",\n            \"status\": \"signed\",\n            \"created_at\": \"2026-03-05T22:46:47.863322Z\",\n            \"updated_at\": \"2026-03-06T04:38:16.138884Z\",\n            \"verified_at\": null,\n            \"version\": 5,\n            \"partner\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n            \"client\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\"\n        },\n        {\n            \"id\": \"43948774-1fe1-4af6-84b0-727addcabe49\",\n            \"status\": \"rejected\",\n            \"created_at\": \"2026-03-05T22:26:51.784857Z\",\n            \"updated_at\": \"2026-03-05T22:44:10.066106Z\",\n            \"verified_at\": null,\n            \"version\": 4,\n            \"partner\": \"3f688e8f-46db-45cd-89be-7695c91e6660\",\n            \"client\": \"4c15ad53-f651-442b-ba06-00bd242ce8fe\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "client_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcyNzU0NzE3LCJpYXQiOjE3NzI3NTI5MTcsImp0aSI6IjlhMzBhOWRlODJiOTQ5YTE4Mjk3NjFmYTIxYjU0MmM5IiwidXNlcl9pZCI6IjRjMTVhZDUzLWY2NTEtNDQyYi1iYTA2LTAwYmQyNDJjZThmZSJ9.PkZocf2D3Tvexulv_Dvlb8esxdlF5BKbgWQREomc0ZU"
+		},
+		{
+			"key": "partner_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcyNzYwMjM1LCJpYXQiOjE3NzI3NTMwMzUsImp0aSI6ImRjNDEzMzA4YTZhNzRhMzc5NzA2NzU0MjJjZTljNWRmIiwidXNlcl9pZCI6IjNmNjg4ZThmLTQ2ZGItNDVjZC04OWJlLTc2OTVjOTFlNjY2MCJ9.udSkXHtIaATKnEXxtB-He7IOvj6lTPl1iktjAXDPxXA"
+		},
+		{
+			"key": "kyc_id",
+			"value": "4337f5ae-d2a2-465a-8b28-3da2f7c9f59a"
+		}
+	]
+}

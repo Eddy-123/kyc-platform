@@ -9,6 +9,10 @@ $ git clone git@github.com:Eddy-123/kyc-platform.git
 
 $ cd kyc-platform
 
+$ cp .env.example .env
+
+$ cp received_private_key.pem keys/private_key.pem # replace received_private_key.pem by the location of the private key sent by email
+
 $ docker compose up --build
 ```
 
@@ -50,8 +54,22 @@ Our users are either `Partner`, `Client` or `Admin`
 
 The role of each of them is represented in this schema:
 
-![Users and roles](architecture/users.png)
+![Users and roles](schema/users.png)
 
 A system-focused interaction among them is represented here:
 
-![System](architecture/system.png)
+![System](schema/system.png)
+
+You can locally access Django admin space here:
+
+[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+
+The admin can access audit logs of the whole system:
+
+![System](schema/audit-logs.png)
+
+You can find the postman doc [here](schema/WDS.postman_collection.json) and in the email submitted for the project.
+
+Django enables rapid, secure, and maintainable development, making it ideal for a KYC system with JWT authentication and RSA signatures.
+
+We use RSA signatures because asymmetric cryptography allows secure signing and verification without exposing private keys.
