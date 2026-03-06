@@ -16,7 +16,7 @@ ALLOWED_TRANSITIONS = {
 }
 
 
-def transition_kyc(kyc: KYCVerification, new_status: str):
+def transition_kyc(kyc, new_status):
     current_status = kyc.status
     if new_status not in ALLOWED_TRANSITIONS.get(current_status, []):
         raise ValidationError(

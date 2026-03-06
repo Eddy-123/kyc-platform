@@ -9,3 +9,6 @@ pycparser==3.0
 PyJWT==2.11.0
 python-dotenv==1.2.2
 sqlparse==0.5.5
+pytest==8.3.5
+pytest-django==4.8.0
+model-bakery==1.18.1
