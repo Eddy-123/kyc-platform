@@ -4,6 +4,8 @@ from apps.kyc.views import (
     KYCDetailView,
     DocumentUploadView,
     FaceVerificationView,
+    KYCSignatureView,
+    SignatureVerifyView,
 )
 
 urlpatterns = [
@@ -11,4 +13,6 @@ urlpatterns = [
     path("<uuid:pk>/", KYCDetailView.as_view()),
     path("<uuid:pk>/documents/", DocumentUploadView.as_view()),
     path("<uuid:pk>/face-verification/", FaceVerificationView.as_view()),
+    path("<uuid:pk>/signature/", KYCSignatureView.as_view()),
+    path("signature/verify/", SignatureVerifyView.as_view()),
 ]

@@ -3,7 +3,9 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 
+
 from apps.kyc.models import KYCVerification, FaceVerification
+from apps.kyc.services.signature_service import generate_signature
 from apps.kyc.serializers import (
     KYCCreateSerializer,
     KYCDetailSerializer,
@@ -15,6 +17,7 @@ from apps.kyc.state_machine import transition_kyc
 from apps.audit.models import AuditLog
 from apps.audit.constants import FACE_VERIFICATION_PROCESSED, KYCVerificationConst
 import random
+from apps.kyc.crypto import verify_signature
 
 
 class KYCCreateView(generics.CreateAPIView):
@@ -103,3 +106,34 @@ class FaceVerificationView(generics.GenericAPIView):
             {"result": result, "confidence": confidence},
             status=status.HTTP_200_OK,
         )
+
+
+class KYCSignatureView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, pk):
+        kyc = get_object_or_404(KYCVerification, pk=pk)
+
+        if kyc.status != KYCVerification.Status.VERIFIED:
+            return Response(
+                {"detail": "Invalid state for signing"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        signature = generate_signature(kyc, request.user)
+        transition_kyc(kyc, KYCVerification.Status.SIGNED)
+
+        return Response(
+            {"kyc_id": kyc.id, "signature": signature}, status=status.HTTP_200_OK
+        )
+
+
+class SignatureVerifyView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        payload = request.data.get("payload")
+        signature = request.data.get("signature")
+        valid = verify_signature(payload, signature)
+
+        return Response({"valid": valid}, status=status.HTTP_200_OK)
