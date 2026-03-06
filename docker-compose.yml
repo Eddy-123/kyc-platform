@@ -4,9 +4,9 @@ services:
     container_name: kyc_db
     restart: always
     environment:
-      POSTGRES_DB: kyc_db
-      POSTGRES_USER: kyc_user
-      POSTGRES_PASSWORD: kyc_password
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -18,6 +18,7 @@ services:
     command: >
       sh -c "
       python manage.py migrate &&
+      pytest &&
       python manage.py runserver 0.0.0.0:8000
       "
     volumes:
