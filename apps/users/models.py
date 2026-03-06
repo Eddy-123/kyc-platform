@@ -11,3 +11,6 @@ class User(AbstractUser):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     role = models.CharField(max_length=20, choices=Roles.choices)
+
+    def __str__(self):
+        return f"{self.username}: {self.role}"

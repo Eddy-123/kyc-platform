@@ -1,7 +1,9 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
+from django.db.models import Count, Avg, Q
 
 
 from apps.kyc.models import KYCVerification, FaceVerification
@@ -137,3 +139,42 @@ class SignatureVerifyView(generics.GenericAPIView):
         valid = verify_signature(payload, signature)
 
         return Response({"valid": valid}, status=status.HTTP_200_OK)
+
+
+class PartnerKYCDashboardView(APIView):
+    permission_classes = [IsAuthenticated, IsPartner]
+
+    def get(self, request):
+        partner = request.user
+
+        base_qs = KYCVerification.objects.filter(partner=partner)
+
+        stats = base_qs.aggregate(
+            total=Count("id"),
+            initiated=Count("id", filter=Q(status="initiated")),
+            document_submitted=Count("id", filter=Q(status="document_submitted")),
+            face_verification_pending=Count(
+                "id", filter=Q(status="face_verification_pending")
+            ),
+            verified=Count("id", filter=Q(status="verified")),
+            rejected=Count("id", filter=Q(status="rejected")),
+            signed=Count("id", filter=Q(status="signed")),
+        )
+
+        face_stats = FaceVerification.objects.filter(kyc__partner=partner).aggregate(
+            avg_confidence=Avg("confidence_score")
+        )
+
+        recent_kyc = (
+            base_qs.select_related("partner")
+            .prefetch_related("documents", "face_verification")
+            .order_by("-created_at")[:10]
+        )
+
+        return Response(
+            {
+                "stats": stats,
+                "avg_face_confidence": face_stats["avg_confidence"],
+                "recent_kyc": KYCDetailSerializer(recent_kyc, many=True).data,
+            }
+        )

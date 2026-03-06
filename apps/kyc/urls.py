@@ -6,6 +6,7 @@ from apps.kyc.views import (
     FaceVerificationView,
     KYCSignatureView,
     SignatureVerifyView,
+    PartnerKYCDashboardView,
 )
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
     path("<uuid:pk>/face-verification/", FaceVerificationView.as_view()),
     path("<uuid:pk>/signature/", KYCSignatureView.as_view()),
     path("signature/verify/", SignatureVerifyView.as_view()),
+    path("partners/me/kyc-dashboard/", PartnerKYCDashboardView.as_view()),
 ]

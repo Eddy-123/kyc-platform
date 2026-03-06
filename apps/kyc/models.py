@@ -55,6 +55,9 @@ class IdentityDocument(models.Model):
     checksum_sha256 = models.CharField(max_length=64)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"IdentityDocument(kyc_id={self.kyc.id}, uploaded_at={self.uploaded_at})"
+
     def compute_checksum(self):
         sha256 = hashlib.sha256()
         for chunk in self.file.chunks():

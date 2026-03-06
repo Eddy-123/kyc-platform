@@ -15,15 +15,3 @@ def submit_document(kyc, actor):
         metadata={"status": kyc.status},
     )
 
-
-def mark_verified(kyc, actor):
-    transition_kyc(kyc, KYCVerification.Status.VERIFIED)
-    kyc.verified_at = timezone.now()
-    kyc.save(update_fields=["verified_at"])
-    AuditLog.objects.create(
-        actor=actor,
-        action=KYC_VERIFIED,
-        target_type=KYCVerificationConst,
-        target_id=kyc.id,
-        metadata={"verified_at": str(kyc.verified_at)},
-    )
